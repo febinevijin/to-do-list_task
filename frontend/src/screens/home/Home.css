@@ -1,0 +1,43 @@
+
+
+.todo-card-container {
+    background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+align-items: center;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 20px;
+}
+
+.todo-card {
+  width: 900px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* text-align: center; */
+}
+.todo-card-status-btn {
+  align-self: flex-end;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.todo-card-title {
+    font-size: 24px;
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+.todo-card-description {
+  font-size: 16px;
+  color: #666;
+}
