@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -19,52 +19,48 @@ const style = {
   width: 500,
   bgcolor: "background.paper",
   border: "2px solid #000",
-    boxShadow: 24,
-    margin: 5,
-    p: 4,
- 
+  boxShadow: 24,
+  margin: 5,
+  p: 4,
 };
 const btn = {
-    margin:5
-}
+  margin: 5,
+};
 
-const ChangeStatusModal = ({taskId}) => {
-
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
+const ChangeStatusModal = ({ taskId }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [status, setStatus] = useState();
-  
+
   const handleChangeSubmit = async (e) => {
     e.preventDefault();
     if (!status) {
-      toast("fill status field")
+      toast("fill status field");
     }
     const user = JSON.parse(localStorage.getItem("todoUser"));
-    
-   
+
     try {
-         const config = {
-           headers: {
-             "Content-type": "application/json",
-             Authorization: `Bearer ${user.token}`,
-           },
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
       };
-       const { data } = await axios.put(
+      const { data } = await axios.put(
         ` http://localhost:5000/api/task/updateStatus/${taskId}`,
-         {
-           status,
-         },
-         config
-       );
+        {
+          status,
+        },
+        config
+      );
       if (data) {
         window.location.reload();
       }
     } catch (error) {
-        toast(error.response.data.message);
+      toast(error.response.data.message);
     }
-  }
-  
+  };
 
   return (
     <div>
@@ -105,6 +101,6 @@ const ChangeStatusModal = ({taskId}) => {
       </Modal>
     </div>
   );
-}
+};
 
-export default ChangeStatusModal
+export default ChangeStatusModal;

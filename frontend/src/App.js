@@ -1,12 +1,11 @@
-
-import './App.css';
+import "./App.css";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Home from './screens/home/Home';
-import Register from './screens/register/Register';
-import Login from './screens/login/Login';
-import Header from './components/header/Header';
-import Report from './screens/report/Report';
- import "react-toastify/dist/ReactToastify.css";
+import Home from "./screens/home/Home";
+import Register from "./screens/register/Register";
+import Login from "./screens/login/Login";
+import Header from "./components/header/Header";
+import Report from "./screens/report/Report";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const Layout = () => {
@@ -14,7 +13,6 @@ function App() {
       <div className="app">
         <Header />
         <Outlet />
-        
       </div>
     );
   };
@@ -32,7 +30,6 @@ function App() {
           path: "/report",
           element: <Report />,
         },
-       
       ],
     },
     {
@@ -43,7 +40,6 @@ function App() {
       path: "/login",
       element: <Login />,
     },
-    
   ]);
 
   return (

@@ -62,7 +62,7 @@ const Login = () => {
         },
         config
       );
-      
+
       toast.success("Login Successful", {
         position: "top-center",
         autoClose: 5000,

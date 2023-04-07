@@ -62,7 +62,7 @@ const Report = () => {
           sorted task list based on their status ( pending, canceled, completed
           )
         </h3>
-        
+
         <table>
           <thead>
             <tr>

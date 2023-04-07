@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -28,67 +28,61 @@ const btn = {
   margin: 5,
 };
 
-
 const NewTask = () => {
-
-    const [title,setTitle] = useState();
+  const [title, setTitle] = useState();
   const [description, setDescription] = useState();
-  const [token, setToken] = useState('')
+  const [token, setToken] = useState("");
   const [priority, setPriority] = useState();
   let navigate = useNavigate();
 
-  
-  
   const submitTask = async (e) => {
     e.preventDefault();
     const user = JSON.parse(localStorage.getItem("todoUser"));
     // setToken(user.email);
     // console.log(user.token);
-     if (!title || !priority ) {
-       toast.warn("Title field is mandatory", {
-         position: "top-center",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-       });
+    if (!title || !priority) {
+      toast.warn("Title field is mandatory", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
 
-       return;
+      return;
     }
-    
+
     try {
-       const config = {
-         headers: {
-           "Content-type": "application/json",
-           Authorization: `Bearer ${user.token}`,
-         },
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
       };
-       const { data } = await axios.post(
-         "http://localhost:5000/api/task/createTask",
-         {
-           title,
-           description,
-           priority,
-         },
-         config
+      const { data } = await axios.post(
+        "http://localhost:5000/api/task/createTask",
+        {
+          title,
+          description,
+          priority,
+        },
+        config
       );
-      toast(data.msg,"please refresh the page to see result")
-      if(data)
-      {
-      window.location.reload();
-      }      
+      toast(data.msg, "please refresh the page to see result");
+      if (data) {
+        window.location.reload();
+      }
     } catch (error) {
       toast(error.response.data.message);
     }
-    
-  }
+  };
 
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <div>
       <Button onClick={handleOpen}>Add new task</Button>
@@ -116,7 +110,6 @@ const NewTask = () => {
             />{" "}
             <TextField
               margin="normal"
-              
               fullWidth
               id="description"
               label="description"
@@ -143,7 +136,12 @@ const NewTask = () => {
               <MenuItem value={8}>8</MenuItem>
               <MenuItem value={9}>9</MenuItem>
             </Select>
-            <Button type='submit' sx={btn} variant="contained" onClick={submitTask}>
+            <Button
+              type="submit"
+              sx={btn}
+              variant="contained"
+              onClick={submitTask}
+            >
               Submit
             </Button>
             <ToastContainer />
@@ -152,6 +150,6 @@ const NewTask = () => {
       </Modal>
     </div>
   );
-}
+};
 
-export default NewTask
+export default NewTask;

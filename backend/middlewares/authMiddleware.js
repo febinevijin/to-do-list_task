@@ -1,4 +1,3 @@
- 
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 import expressAsyncHandler from "express-async-handler";
@@ -30,5 +29,3 @@ export const protect = expressAsyncHandler(async (req, res, next) => {
     throw new Error("Not authorized, no token");
   }
 });
-
-

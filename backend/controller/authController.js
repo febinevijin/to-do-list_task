@@ -3,8 +3,7 @@ import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 
 export const register = asyncHandler(async (req, res) => {
-   
-    const email = req.body.email;
+  const email = req.body.email;
   const userExist = await User.findOne({ email: email });
   if (userExist) {
     res.status(400);

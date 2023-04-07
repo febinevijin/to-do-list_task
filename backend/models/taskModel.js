@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const { Schema } = mongoose;
 
 const taskSchema = new Schema(
@@ -21,10 +20,10 @@ const taskSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "completed", "cancelled",],
+      enum: ["pending", "completed", "cancelled"],
       default: "pending",
     },
-   
+
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -32,7 +31,5 @@ const taskSchema = new Schema(
   },
   { timestamps: true }
 );
-
-
 
 export default mongoose.model("Task", taskSchema);

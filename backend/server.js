@@ -22,9 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRouter);
 app.use("/api/task", taskRouter);
 
-
 app.use(notFound);
-app.use(errorHandler); 
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 
