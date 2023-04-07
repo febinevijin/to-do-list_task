@@ -16,25 +16,18 @@ const Header = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" className="navbar">
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
+          
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              News
+              <Link to="/" className="link">
+                To-Do Task
+              </Link>
             </Typography>
             <Button color="inherit">
               <Link to="/Report" className="link">
                 Report
               </Link>
             </Button>
-           
-           
+
             <Button color="inherit"></Button>
 
             <Button color="inherit">Logout</Button>

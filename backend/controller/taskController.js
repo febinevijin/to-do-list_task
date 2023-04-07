@@ -32,7 +32,7 @@ export const getAllTask = asyncHandler(async (req, res) => {
         let userId = req.user._id;
         const allTask = await Task.find({
           user: userId,
-          status: "pending",
+       
         }).sort({ priority: 1 });
         res.status(200).json(allTask);
     } catch (error) {
@@ -115,7 +115,7 @@ export const getTaskCount = asyncHandler(async (req, res) => {
               },
               canceled: {
                 $sum: {
-                  $cond: [{ $eq: ["$_id", "canceled"] }, "$count", 0],
+                  $cond: [{ $eq: ["$_id", "cancelled"] }, "$count", 0],
                 },
               },
             },
@@ -147,7 +147,7 @@ export const getSortedTask = asyncHandler(async (req, res) => {
                   then: 1,
                   else: {
                     $cond: {
-                      if: { $eq: ["$status", "canceled"] },
+                      if: { $eq: ["$status", "cancelled"] },
                       then: 2,
                       else: 3,
                     },

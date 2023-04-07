@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -26,11 +28,43 @@ const btn = {
     margin:5
 }
 
-const ChangeStatusModal = () => {
+const ChangeStatusModal = ({taskId}) => {
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+  const handleClose = () => setOpen(false);
+  const [status, setStatus] = useState();
+  
+  const handleChangeSubmit = async (e) => {
+    e.preventDefault();
+    if (!status) {
+      toast("fill status field")
+    }
+    const user = JSON.parse(localStorage.getItem("todoUser"));
+    
+   
+    try {
+         const config = {
+           headers: {
+             "Content-type": "application/json",
+             Authorization: `Bearer ${user.token}`,
+           },
+      };
+       const { data } = await axios.put(
+        ` http://localhost:5000/api/task/updateStatus/${taskId}`,
+         {
+           status,
+         },
+         config
+       );
+      if (data) {
+        window.location.reload();
+      }
+    } catch (error) {
+        toast(error.response.data.message);
+    }
+  }
+  
 
   return (
     <div>
@@ -52,14 +86,20 @@ const ChangeStatusModal = () => {
               id="demo-simple-select"
               //   value={age}
               label="Age"
-              //   onChange={handleChange}
+              onChange={(e) => setStatus(e.target.value)}
             >
-              <MenuItem value={"cancel"}>cancel</MenuItem>
-              <MenuItem value={"delete"}>delete</MenuItem>
+              <MenuItem value={"cancelled"}>cancelled</MenuItem>
+              <MenuItem value={"completed"}>completed</MenuItem>
             </Select>
-            <Button sx={btn} variant="contained">
+            <Button
+              type="submit"
+              onClick={handleChangeSubmit}
+              sx={btn}
+              variant="contained"
+            >
               Submit
             </Button>
+            <ToastContainer />
           </FormControl>
         </Box>
       </Modal>

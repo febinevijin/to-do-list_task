@@ -6,6 +6,7 @@ import Register from './screens/register/Register';
 import Login from './screens/login/Login';
 import Header from './components/header/Header';
 import Report from './screens/report/Report';
+ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const Layout = () => {

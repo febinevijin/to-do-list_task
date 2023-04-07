@@ -10,9 +10,11 @@ import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 import authRouter from "./routes/authRoute.js";
 import taskRouter from "./routes/taskRoute.js";
 dotenv.config({ path: path.resolve(__dirname, "./.env") });
+import cors from "cors";
 
 connectDB();
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
